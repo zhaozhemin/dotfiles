@@ -13,14 +13,15 @@ set wildmode=list:longest
 
 set statusline=
 set statusline+=%f  " relative filename
+set statusline+=\ %{FugitiveStatusline()}  " git
 set statusline+=\ %m  " modified flag
 set statusline+=%r  " readonly flag
 set statusline+=%=  " separation point between left and right
 set statusline+=%y  " file type
 set statusline+=[%{&fileformat}]  " file format
 " set statusline+=[%{&fileencoding?&fileencoding:&encoding}]  " file encoding
-set statusline+=[%l/%L:%c]  " row and column
-set statusline+=\ %P  " percentage
+set statusline+=[%l,%c]  " row
+set statusline+=%P  " percentage
 set laststatus=2  " always show status line
 
 set termguicolors
@@ -30,6 +31,7 @@ colorscheme gruvbox
 set showcmd
 set confirm
 
+set incsearch
 set hlsearch  " highlight search term
 " Use <C-l> to stop the highlighting
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
@@ -40,6 +42,9 @@ set mouse=a
 " Avoid key chords
 nnoremap <Space> :
 vnoremap <Space> :
+
+inoremap <C-a> <C-o>I
+inoremap <C-e> <C-o>A
 
 " Format options
 set formatoptions+=n  " numbered lists
