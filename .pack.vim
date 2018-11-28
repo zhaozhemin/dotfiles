@@ -5,22 +5,23 @@ if !exists('*minpac#init')
 endif
 
 call minpac#init()
-call minpac#add('ervandew/supertab')
+call minpac#add('jpalardy/vim-slime')
 call minpac#add('jremmen/vim-ripgrep')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('kovisoft/paredit')
 call minpac#add('lepture/vim-jinja')
 call minpac#add('lilydjwg/fcitx.vim')
+call minpac#add('lifepillar/vim-mucomplete')
 call minpac#add('mattn/emmet-vim')
+call minpac#add('metakirby5/codi.vim')
 call minpac#add('morhetz/gruvbox', {'type': 'opt'})
-call minpac#add('nvie/vim-flake8')
-call minpac#add('pangloss/vim-javascript')
+call minpac#add('sheerun/vim-polyglot')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-vinegar')
 call minpac#add('w0rp/ale')
-call minpac#add('wlangstroth/vim-racket')
 
 command! PackUpdate call minpac#update()
 command! PackStatus call minpac#status()
@@ -30,16 +31,18 @@ command! PackClean call minpac#clean()
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 
-" Supertab settings
-let g:SuperTabDefaultCompletionType="context"
-let g:SuperTabContextDefaultCompletionType="<c-p>"
-let g:SuperTabRetainCompletionDuration="completion"
-let g:SuperTabClosePreviewOnPopupClose=1
-" autocmd FileType *
-"   \ if &omnifunc != '' |
-"   \   call SuperTabChain(&omnifunc, "<c-p>") |
-"   \ endif
-
 " Fugitive settings
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+
+" Slime settings
+let g:slime_target = "vimterminal"
+
+" Mucomplete settings
+let g:mucomplete#chains = {}
+let g:mucomplete#chains.default = ['path', 'omni', 'keyp', 'dict', 'uspl', 'c-p']
+let g:mucomplete#chains.vim = ['path', 'cmd', 'keyp']
+
+" Paredit settings
+let g:paredit_electric_return = 0
+let g:paredit_leader = '\'

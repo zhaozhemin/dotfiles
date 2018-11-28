@@ -14,7 +14,9 @@ set softtabstop=4
 " Status line
 set statusline=
 set statusline+=%f  " relative filename
-silent! set statusline+=\ %{FugitiveStatusline()}  " git
+if exists("g:loaded_fugitive")
+  set statusline+=\ %{FugitiveStatusline()}  " git
+endif
 set statusline+=\ %m  " modified flag
 set statusline+=%r  " readonly flag
 set statusline+=%=  " separation point between left and right
@@ -29,10 +31,12 @@ set termguicolors
 set background=dark
 silent! colorscheme gruvbox
 
-set incsearch
+" Searching
+set smartcase
+set incsearch  " incremental searching
 set hlsearch  " highlight search term
-" Use <C-l> to stop the highlighting
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+" Use <C-g> to stop the highlighting
+nnoremap <silent> <C-g> :<C-u>nohlsearch<CR><C-l>
 
 " Format options
 set formatoptions+=n  " numbered lists
@@ -41,6 +45,7 @@ set formatoptions+=B  " don't add a space between two multi-byte characters
 set formatoptions+=j  " remove a comment leader when joining lines
 set nojoinspaces  " don't insert two spaces after period
 
+" Gvim
 if has("gui_running")
   set guioptions+=c  " use console dialogs
   set guioptions-=m  " remove menu
@@ -53,10 +58,10 @@ if has("gui_running")
 endif
 
 " Window management
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Misc
 nnoremap <Space> :
@@ -68,3 +73,6 @@ set showcmd
 set confirm
 set wildmenu
 set wildmode=list:longest
+set backspace=indent,eol,start  " make backspace reasonable
+set completeopt+=menuone  " required by Mucomplete
+set hidden  " close the window without saving first (be carefule using :qa!)
