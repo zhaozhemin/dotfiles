@@ -1,8 +1,10 @@
 syntax on
 filetype plugin indent on
 
+let mapleader=","
+
 " Load packages
-silent! source $HOME/.pack.vim
+runtime pack.vim
 
 " Whitespaces
 set listchars=tab:»\ ,trail:~
@@ -28,7 +30,7 @@ set laststatus=2  " always show status line
 
 " Color scheme
 set termguicolors
-set background=dark
+set background=light
 silent! colorscheme gruvbox
 
 " Searching
