@@ -3,9 +3,6 @@
     "server_port": -1,
     "local_port": 1080,
     "password": "",
-    "timeout": 300,
-    "method": "chacha20-ietf-poly1305",
-    "fast_open": true,
-    "workers": 1,
-    "prefer_ipv6": false
+    "timeout": 60,
+    "method": "chacha20-ietf-poly1305"
 }
