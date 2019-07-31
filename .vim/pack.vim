@@ -1,20 +1,22 @@
 packadd minpac
+packadd matchit
 
 if !exists('*minpac#init')
   finish
 endif
 
 call minpac#init()
+
 call minpac#add('jpalardy/vim-slime')
 call minpac#add('jremmen/vim-ripgrep')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('kovisoft/paredit', {'type': 'opt'})
-call minpac#add('lepture/vim-jinja')
 call minpac#add('lifepillar/vim-mucomplete')
 call minpac#add('lilydjwg/fcitx.vim')
 call minpac#add('mattn/emmet-vim')
 call minpac#add('metakirby5/codi.vim')
 call minpac#add('morhetz/gruvbox', {'type': 'opt'})
+call minpac#add('rakr/vim-one', {'type': 'opt'})
 call minpac#add('sheerun/vim-polyglot')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-fugitive')
@@ -30,6 +32,7 @@ command! PackClean call minpac#clean()
 " ALE settings
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+let g:ale_linters = {'python': ['pyls']}
 
 " Fugitive settings
 nnoremap <Leader>gs :Gstatus<CR>
@@ -51,3 +54,5 @@ let g:mucomplete#chains.vim = ['path', 'cmd', 'keyp']
 
 " Paredit settings
 let g:paredit_electric_return = 0
+
+let g:polyglot_disabled = ['csv']

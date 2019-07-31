@@ -15,30 +15,28 @@ set softtabstop=4
 
 " Status line
 set statusline=
-set statusline+=%f  " relative filename
-if exists("g:loaded_fugitive")
-  set statusline+=\ %{FugitiveStatusline()}  " git
-endif
+set statusline+=%{FugitiveStatusline()}  " git
+set statusline+=\ %f  " relative filename
 set statusline+=\ %m  " modified flag
 set statusline+=%r  " readonly flag
 set statusline+=%=  " separation point between left and right
 set statusline+=%y  " file type
 set statusline+=[%{&fileformat}]  " file format
 set statusline+=[%l,%c]  " row
-set statusline+=%P  " percentage
+set statusline+=\ %P  " percentage
 set laststatus=2  " always show status line
 
 " Color scheme
 set termguicolors
 set background=light
-silent! colorscheme gruvbox
+colorscheme one
 
 " Searching
 set smartcase
 set incsearch  " incremental searching
 set hlsearch  " highlight search term
 " Use <C-g> to stop the highlighting
-nnoremap <silent> <C-g> :<C-u>nohlsearch<CR><C-l>
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " Format options
 set formatoptions+=n  " numbered lists
@@ -59,16 +57,14 @@ if has("gui_running")
   silent! colorscheme gruvbox
 endif
 
-" Window management
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Misc
+" Mappings
 nnoremap <Space> :
 vnoremap <Space> :
 map Y y$
+nmap gd <Plug>(ale_go_to_definition)
+nmap gr <Plug>(ale_find_references)
+
+" Misc
 set ttimeoutlen=100  " fcitx.vim
 set mouse=a  " use mouse in all modes
 set showcmd
@@ -77,4 +73,5 @@ set wildmenu
 set wildmode=list:longest
 set backspace=indent,eol,start  " make backspace reasonable
 set completeopt+=menuone  " required by Mucomplete
+set completeopt-=preview
 set hidden  " close the window without saving first (be carefule using :qa!)
