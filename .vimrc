@@ -3,8 +3,8 @@ filetype plugin indent on
 
 let mapleader=","
 
-" Load packages
-runtime pack.vim
+runtime packages.vim
+runtime mappings.vim
 
 " Whitespaces
 set listchars=tab:»\ ,trail:~
@@ -27,16 +27,17 @@ set statusline+=\ %P  " percentage
 set laststatus=2  " always show status line
 
 " Color scheme
-set termguicolors
+if has("gui_running") || $COLORTERM == "truecolor" || $COLORTERM == "24bit"
+  set termguicolors
+  silent! colorscheme one
+endif
+
 set background=light
-colorscheme one
 
 " Searching
 set smartcase
 set incsearch  " incremental searching
 set hlsearch  " highlight search term
-" Use <C-g> to stop the highlighting
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " Format options
 set formatoptions+=n  " numbered lists
@@ -47,30 +48,32 @@ set nojoinspaces  " don't insert two spaces after period
 
 " Gvim
 if has("gui_running")
-  set guioptions+=c  " use console dialogs
+  " set guioptions+=c  " use console dialogs
   set guioptions-=m  " remove menu
   set guioptions-=r  " remove right scrollbar
   set guioptions-=L  " remove left scrollbar
   set guioptions-=T  " remove toolbar
   set guicursor=a:block-blinkon0  " disable cursor blink
-  set background=dark
-  silent! colorscheme gruvbox
+  set background=light
 endif
 
-" Mappings
-nnoremap <Space> :
-vnoremap <Space> :
-map Y y$
-nmap gd <Plug>(ale_go_to_definition)
-nmap gr <Plug>(ale_find_references)
+if has("gui_macvim")
+  set macmeta
+  set guifont=Menlo:h14
+  " For some reason, MacVim doesn't pick up the system's $SHELL.
+  set shell=/bin/zsh
+endif
+
+if !has("gui_running")
+  set ttimeoutlen=100  " fcitx.vim
+endif
 
 " Misc
-set ttimeoutlen=100  " fcitx.vim
 set mouse=a  " use mouse in all modes
 set showcmd
 set confirm
 set wildmenu
-set wildmode=list:longest
+set wildmode=longest:full,full
 set backspace=indent,eol,start  " make backspace reasonable
 set completeopt+=menuone  " required by Mucomplete
 set completeopt-=preview
