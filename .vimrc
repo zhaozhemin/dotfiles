@@ -29,10 +29,7 @@ set laststatus=2  " always show status line
 " Color scheme
 if has("gui_running") || $COLORTERM == "truecolor" || $COLORTERM == "24bit"
   set termguicolors
-  silent! colorscheme one
 endif
-
-set background=light
 
 " Searching
 set smartcase
@@ -54,7 +51,6 @@ if has("gui_running")
   set guioptions-=L  " remove left scrollbar
   set guioptions-=T  " remove toolbar
   set guicursor=a:block-blinkon0  " disable cursor blink
-  set background=light
 endif
 
 if has("gui_macvim")
@@ -78,3 +74,28 @@ set backspace=indent,eol,start  " make backspace reasonable
 set completeopt+=menuone  " required by Mucomplete
 set completeopt-=preview
 set hidden  " close the window without saving first (be carefule using :qa!)
+
+" Copied from archlinux.vim
+if exists('$XDG_CACHE_HOME')
+  let &g:directory=$XDG_CACHE_HOME
+else
+  let &g:directory=$HOME . '/.cache'
+endif
+
+let &g:undodir=&g:directory . '/vim/undo//'
+let &g:backupdir=&g:directory . '/vim/backup//'
+let &g:directory.='/vim/swap//'
+
+" Create directories if they doesn't exist
+if ! isdirectory(expand(&g:directory))
+  silent! call mkdir(expand(&g:directory), 'p', 0700)
+endif
+
+if ! isdirectory(expand(&g:backupdir))
+  silent! call mkdir(expand(&g:backupdir), 'p', 0700)
+endif
+
+if ! isdirectory(expand(&g:undodir))
+  silent! call mkdir(expand(&g:undodir), 'p', 0700)
+endif
+
